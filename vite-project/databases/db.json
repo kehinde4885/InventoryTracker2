@@ -1,0 +1,189 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "item": "Shirt",
+      "quantity": 20,
+      "price": 25,
+      "type": "Upper Body"
+    },
+    {
+      "item": "Pants",
+      "quantity": 15,
+      "price": 35,
+      "type": "Lower Body"
+    },
+    {
+      "item": "Dress",
+      "quantity": 10,
+      "price": 50,
+      "type": "One Piece"
+    },
+    {
+      "item": "Shoes",
+      "quantity": 5,
+      "price": 100,
+      "type": "Footwear"
+    },
+    {
+      "item": "Jacket",
+      "quantity": 10,
+      "price": 75,
+      "type": "Outerwear"
+    },
+    {
+      "item": "Skirt",
+      "quantity": 8,
+      "price": 30,
+      "type": "Lower Body"
+    },
+    {
+      "item": "Sunglasses",
+      "quantity": 12,
+      "price": 20,
+      "type": "Accessories"
+    },
+    {
+      "item": "Hat",
+      "quantity": 6,
+      "price": 15,
+      "type": "Accessories"
+    },
+    {
+      "item": "Belt",
+      "quantity": 9,
+      "price": 12,
+      "type": "Accessories"
+    },
+    {
+      "item": "Scarf",
+      "quantity": 7,
+      "price": 18,
+      "type": "Accessories"
+    },
+    {
+      "item": "T-Shirt",
+      "quantity": 20,
+      "price": 15,
+      "type": "Upper Body"
+    },
+    {
+      "item": "Jeans",
+      "quantity": 15,
+      "price": 40,
+      "type": "Lower Body"
+    },
+    {
+      "item": "Sweater",
+      "quantity": 10,
+      "price": 55,
+      "type": "Upper Body"
+    },
+    {
+      "item": "Sneakers",
+      "quantity": 5,
+      "price": 90,
+      "type": "Footwear"
+    },
+    {
+      "item": "Blazer",
+      "quantity": 8,
+      "price": 80,
+      "type": "Outerwear"
+    },
+    {
+      "item": "Shorts",
+      "quantity": 12,
+      "price": 20,
+      "type": "Lower Body"
+    },
+    {
+      "item": "Watch",
+      "quantity": 10,
+      "price": 50,
+      "type": "Accessories"
+    },
+    {
+      "item": "Earrings",
+      "quantity": 8,
+      "price": 12,
+      "type": "Accessories"
+    },
+    {
+      "item": "Necklace",
+      "quantity": 5,
+      "price": 20,
+      "type": "Accessories"
+    },
+    {
+      "item": "Trouser",
+      "quantity": "5",
+      "price": "200",
+      "type": "Lower Body",
+      "id": 2
+    },
+    {
+      "item": "Trouser",
+      "quantity": "5",
+      "price": "200",
+      "type": "Lower Body",
+      "id": 20
+    },
+    {
+      "item": "PlayBoy",
+      "quantity": "5",
+      "price": "10",
+      "type": "Full-Body",
+      "id": 21
+    },
+    {
+      "item": "Monica",
+      "quantity": "200",
+      "price": "200",
+      "type": "Lower Body",
+      "id": 4
+    },
+    {
+      "item": "hhjjkjjhbdxgvj",
+      "quantity": "700",
+      "price": "4",
+      "type": "gvhv",
+      "id": "03d459c2-dbd2-4a8c-831b-27568027552b"
+    },
+    {
+      "item": "hot",
+      "quantity": "200",
+      "price": "50",
+      "type": "Full-Body",
+      "id": "9affda5f-0871-4f6c-bea3-f8a8bb3ddbbd"
+    },
+    {
+      "item": "hot",
+      "quantity": "200",
+      "price": "50",
+      "type": "Full-Body",
+      "id": "0940373f-54fb-4874-97e9-0d21ed121158"
+    },
+    {
+      "item": "hot",
+      "quantity": "200",
+      "price": "50",
+      "type": "Full-Body",
+      "id": "88c0c968-25c3-412b-b92e-a1ee667357f2"
+    },
+    {
+      "item": "Monkey",
+      "quantity": "5000",
+      "price": "20",
+      "type": "Full-Body",
+      "id": "c10d0ff6-0f7f-4780-8c54-b65453f8072d"
+    },
+    {
+      "item": "Move",
+      "quantity": "500",
+      "price": "5000",
+      "type": "Access",
+      "id": "ed037a3e-bc00-4ff6-a3da-4274f3071724"
+    }
+  ]
+}
