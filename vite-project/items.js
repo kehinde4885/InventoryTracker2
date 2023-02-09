@@ -1,4 +1,4 @@
-let items = [
+let items1 = [
   {
     item: "Shirt",
     quantity: 20,
@@ -133,4 +133,4 @@ let items = [
   },
 ]
 
-export {items}
+export {items1}

@@ -1,17 +1,23 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { items1 } from "../items";
+
+import _ from "lodash";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/items")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
+  console.log(items);
 
-    console.log("useEffect Ran");
-  }, []);
+    useEffect(() => {
+      console.log("useEffect Ran");
 
+      fetch("http://localhost:3000/items")
+        .then((res) => res.json())
+        .then((data) => setItems(data));
+    }, []);
+
+  console.log("Component Rerendered");
   return (
     <div>
       <table className="table-auto">
@@ -29,16 +35,38 @@ function InventoryList() {
                 <td>{item.item}</td>
                 <td>${item.price}</td>
                 <td>{item.quantity}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      handleDelete(index);
+                    }}
+                    className="inline"
+                  >
+                    delete
+                  </button>
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
 
-
       <button className="border border-blue-700">New Item</button>
     </div>
   );
+
+  function handleDelete(location) {
+    setItems((prevItem) => {
+      let array = [...prevItem];
+      let deleted = _.remove(array, function (value, index, array) {
+        if (index === location) {
+          return value;
+        }
+      });
+
+      return array;
+    });
+  }
 }
 
 export { InventoryList };

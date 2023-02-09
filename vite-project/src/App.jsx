@@ -7,9 +7,11 @@ import { AddInventory } from './AddInventory'
 function App() {
   const [inventory, setInventory] = useState([])
 
+  console.log('App Rendered')
+
   return (
     <div className="App">
-      <AddInventory/>
+      <InventoryList/>
       
     </div>
       
