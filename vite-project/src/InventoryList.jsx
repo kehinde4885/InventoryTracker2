@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import Items from "./Itemslist";
 import { items1 } from "../items";
 
 import _ from "lodash";
+import Itemslist from "./Itemslist";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
 
-  console.log(items);
+  //console.log(items)
 
     useEffect(() => {
       console.log("useEffect Ran");
@@ -17,7 +19,7 @@ function InventoryList() {
         .then((data) => setItems(data));
     }, []);
 
-  console.log("Component Rerendered");
+  console.log("Inventory Component Rerendered");
   return (
     <div>
       <table className="table-auto">
@@ -29,25 +31,14 @@ function InventoryList() {
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{item.item}</td>
-                <td>${item.price}</td>
-                <td>{item.quantity}</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      handleDelete(index);
-                    }}
-                    className="inline"
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          <Itemslist 
+          items={items}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleChange={handleChange}
+          
+          />
+          
         </tbody>
       </table>
 
@@ -58,6 +49,7 @@ function InventoryList() {
   function handleDelete(location) {
     setItems((prevItem) => {
       let array = [...prevItem];
+      //Used Lodash to delete item from array
       let deleted = _.remove(array, function (value, index, array) {
         if (index === location) {
           return value;
@@ -67,6 +59,36 @@ function InventoryList() {
       return array;
     });
   }
+
+
+  //HandleChange and HandleEdit can be Combined together
+  function handleChange(e,location){
+    console.log(e.target.name)
+    console.log(e.target.value)
+    console.log(location)
+
+    let array = [...items]
+
+    array[location] = ({...array[location], [e.target.name] : e.target.value})
+
+    setItems(array)
+  
+  }
+
+  function handleEdit(location){
+    let array = [...items]
+
+    array[location].isEditing = array[location].isEditing ? false : true
+
+    // if(array[location].isEditing){
+    //   console.log(array[location].isEditing = false)
+    // }else{
+    //   console.log(array[location].isEditing = true)
+    // }
+    setItems(array)
+    
+  }
 }
+
 
 export { InventoryList };

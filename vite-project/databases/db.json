@@ -5,7 +5,8 @@
       "item": "Shirt",
       "quantity": 20,
       "price": 25,
-      "type": "Upper Body"
+      "type": "Upper Body",
+      "isEditing" : false
     },
     {
       "item": "Pants",
