@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 let items1 = [
   {
     item: "Shirt",
@@ -131,6 +133,89 @@ let items1 = [
     price: 1000,
     type: "Lower Body",
   },
-]
+];
 
-export {items1}
+//building a Sort Algorithm
+let array = [7, 5, 8, 0, 6];
+
+//Sum of numbers Recursively
+
+function sum(array) {
+  console.log(array);
+
+  //ends the sum function
+  if (array.length === 0) {
+    return 0;
+  }
+
+  let total = sum(array.slice(1));
+
+  return total + array[0];
+}
+
+function mergeSort(arr) {
+  if (arr.length <= 1) {
+    // console.log('returned',arr)
+    return arr;
+  }
+
+  let middle = Math.floor(arr.length / 2);
+  console.log(middle)
+
+  let left = mergeSort(arr.slice(0, middle));
+
+  let right = mergeSort(arr.slice(middle));
+
+  //console.log(left);
+
+
+  //console.log(right);
+
+  let sortedArray = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] <= right[rightIndex]) {
+      sortedArray.push(left[leftIndex]);
+      //console.log(sortedArray);
+      leftIndex++;
+      //console.log("left", leftIndex);
+    } else if (left[leftIndex] > right[rightIndex]) {
+      sortedArray.push(right[rightIndex]);
+      //console.log(sortedArray);
+      rightIndex++;
+      //console.log("right", rightIndex);
+    }
+  }
+
+  console.log(leftIndex)
+
+  console.log(rightIndex)
+
+  for(let i = leftIndex ;i < left.length ; i++){
+    sortedArray.push(left[i])
+  }
+
+  for(let i = rightIndex ;i < right.length ; i++){
+    sortedArray.push(right[i])
+  }
+  
+
+  console.log(sortedArray);
+  return sortedArray;
+}
+
+
+
+
+console.log(mergeSort([5,90,6, 6, 100,200,80,30,45,1000]));
+
+
+
+let arr = [5]
+
+//console.log(arr.slice(1)[0])
+//console.log(Math.floor(3/2))
+
+export { items1 };

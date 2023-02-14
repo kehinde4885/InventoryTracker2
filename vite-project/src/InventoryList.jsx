@@ -12,14 +12,14 @@ function InventoryList() {
   //console.log(items)
 
     useEffect(() => {
-      console.log("useEffect Ran");
+      //console.log("useEffect Ran");
 
       fetch("http://localhost:3000/items")
         .then((res) => res.json())
         .then((data) => setItems(data));
     }, []);
 
-  console.log("Inventory Component Rerendered");
+  //console.log("Inventory Component Rerendered");
   return (
     <div>
       <table className="table-auto">
@@ -63,10 +63,6 @@ function InventoryList() {
 
   //HandleChange and HandleEdit can be Combined together
   function handleChange(e,location){
-    console.log(e.target.name)
-    console.log(e.target.value)
-    console.log(location)
-
     let array = [...items]
 
     array[location] = ({...array[location], [e.target.name] : e.target.value})

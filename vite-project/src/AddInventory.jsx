@@ -5,7 +5,9 @@ import { useReducer } from "react";
 
 
 
-
+//A reducer function used to handle logic of state changes, all you 
+//need to do is pass along the case/ Context the state needs to be
+//changed in through the action parameter.
 function reducer(state, action) {
   if (action.type === "form_submitted") {
     return {
@@ -23,6 +25,8 @@ function reducer(state, action) {
 }
 
 function AddInventory() {
+  //when using a useReducer Hook, the callbackFn 'editItem'
+  //will call the reducer function above.
   const [item, editItem] = useReducer(reducer, {
     item: "",
     quantity: 0,

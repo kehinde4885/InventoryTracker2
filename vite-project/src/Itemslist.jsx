@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export default function Itemslist(props) {
-  console.log(props)
 
   const {items,handleDelete,handleEdit,handleChange} = props
   
-  console.log('ItemsList Rendered')
+  // console.log('ItemsList Rendered')
   
   return (
     items.map((item, index) => {
@@ -37,5 +36,4 @@ export default function Itemslist(props) {
 
   
 }
-
 
