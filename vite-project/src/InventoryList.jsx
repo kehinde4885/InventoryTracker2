@@ -4,41 +4,36 @@ import Items from "./Itemslist";
 
 import { mergeSort } from "../functions";
 
-
 import _ from "lodash";
 import Itemslist from "./Itemslist";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
-  const [byQuantity,quantitySort] = useState([])
-  const [byPrice,priceSort] = useState([])
-  
+  const [byQuantity, quantitySort] = useState([]);
+  const [byPrice, priceSort] = useState([]);
 
-  console.log(items)
-  console.log(byQuantity)
-  console.log(byPrice)
+  // console.log(items)
+  // console.log(byQuantity)
+  // console.log(byPrice)
 
-  useEffect( ()=> {
-    if(items.length){
-      let arr1 = mergeSort(items,'quantity')
-      let arr2 = mergeSort(items,'price')
-      quantitySort(arr1)
-      priceSort(arr2)
+  useEffect(() => {
+    if (items.length) {
+      let arr1 = mergeSort(items, "quantity");
+      let arr2 = mergeSort(items, "price");
+      quantitySort(arr1);
+      priceSort(arr2);
     }
-  },[items])
+  }, [items]);
 
+  useEffect(() => {
+    //console.log("useEffect Ran");
 
-    useEffect(() => {
-      //console.log("useEffect Ran");
+    fetch("http://localhost:3000/items")
+      .then((res) => res.json())
+      .then((data) => setItems(data));
+  }, []);
 
-      fetch("http://localhost:3000/items")
-        .then((res) => res.json())
-        .then((data) => setItems(data));
-    }, []);
-
-    //console.log(mergeSort(items,'quantity'))
-
-
+  //console.log(mergeSort(items,'quantity'))
 
   //console.log("Inventory Component Rerendered");
   return (
@@ -47,19 +42,19 @@ function InventoryList() {
         <thead className="border-red-500 border">
           <tr>
             <th>Item</th>
-            <th><button className="bg-blue">Price</button></th>
+            <th>
+              <button className="bg-blue">Price</button>
+            </th>
             <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
-          <Itemslist 
-          items={items}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          handleChange={handleChange}
-          
+          <Itemslist
+            items={items}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleChange={handleChange}
           />
-          
         </tbody>
       </table>
 
@@ -83,30 +78,30 @@ function InventoryList() {
   }
 
 
-  //HandleChange and HandleEdit can be Combined together
-  function handleChange(e,location){
-    let array = [...items]
+  //HandleChange and HandleEdit Combined together using 
+  //a Conditional
 
-    array[location] = ({...array[location], [e.target.name] : e.target.value})
+  function handleEdit(e, id) {
+    let array = [...items];
 
-    setItems(array)
-  
-  }
+    //look for the array item with the same id
 
-  function handleEdit(location){
-    let array = [...items]
+    let location = array.findIndex((item) => item.id === id);
 
-    array[location].isEditing = array[location].isEditing ? false : true
+    //HandleEdit
+    if (e.type === "click") {
+      //Change the Value of isEditing Property in state
+      array[location].isEditing = array[location].isEditing ? false : true;
 
-    // if(array[location].isEditing){
-    //   console.log(array[location].isEditing = false)
-    // }else{
-    //   console.log(array[location].isEditing = true)
-    // }
-    setItems(array)
-    
+      setItems(array);
+    } 
+    //HandleChange
+    else if (e.type === "change") {
+      array[location] = { ...array[location], [e.target.name]: e.target.value };
+
+      setItems(array);
+    }
   }
 }
-
 
 export { InventoryList };

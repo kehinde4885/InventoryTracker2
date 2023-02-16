@@ -11,12 +11,12 @@ export default function Itemslist(props) {
     items.map((item, index) => {
       return (
         <tr key={index}>
-          <td>{item.isEditing ? <input onChange={(event)=>{handleChange(event,index)}} type="text"  name='item' value={item.item} /> : item.item}</td>
-          <td>{item.isEditing ? <input onChange={(event)=>{handleChange(event,index)}} type="text"  name='price' value={item.price} /> : `$${item.price}`}</td>
-          <td>{item.isEditing ? <input onChange={(event)=>{handleChange(event,index)}} type="text"  name='quantity' value={item.quantity} /> : item.quantity}</td>
+          <td>{item.isEditing ? <input onChange={(event)=>{handleEdit(event,item.id)}} type="text"  name='item' value={item.item} /> : item.item}</td>
+          <td>{item.isEditing ? <input onChange={(event)=>{handleEdit(event,item.id)}} type="text"  name='price' value={item.price} /> : `$${item.price}`}</td>
+          <td>{item.isEditing ? <input onChange={(event)=>{handleEdit(event,item.id)}} type="text"  name='quantity' value={item.quantity} /> : item.quantity}</td>
           <td className="space-x-4"> 
             <button
-            onClick={()=>{handleEdit(index)}}
+            onClick={(event)=>{handleEdit(event,item.id)}}
             className="inline"
           >
             {item.isEditing ? 'save' : 'edit'}
