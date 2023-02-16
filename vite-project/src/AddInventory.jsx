@@ -35,7 +35,9 @@ function AddInventory() {
     id: uuidv4(),
   });
 
-  console.log("Component ReRendered");
+  //console.log("Add Inventory Component ReRendered");
+
+  //console.log(item)
 
   return (
     <form>
@@ -55,7 +57,7 @@ function AddInventory() {
         <input
           onChange={handleChange}
           value={item.quantity}
-          type="text"
+          type="number"
           name="quantity"
           id="quantity"
         />
@@ -81,22 +83,29 @@ function AddInventory() {
         />
       </div>
 
-      <button onClick={handleClick} className="border border-blue-700">
+      <button onClick={handleSubmit} className="border border-blue-700">
         Add Item
       </button>
     </form>
   );
 
-  function handleClick(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     submitForm();
-    console.log("Form Submitted");
+    //console.log("Form Submitted");
+
+    //Run Reducer Function to reset Form
     editItem({ type: "form_submitted" });
   }
 
   function handleChange(e) {
     const { name, value } = e.target;
-    let form = { ...item, [name]: value };
+    //console.log(typeof value)
+    
+    //console.log(e)
+
+    let form = { ...item, [name]: name === 'price' || name === 'quantity' ? parseInt(value) : value};
+    //console.log(form)
     editItem({ type: "form_edited", form: form });
   }
 

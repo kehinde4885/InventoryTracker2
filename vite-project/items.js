@@ -1,4 +1,10 @@
-import _ from "lodash";
+//import _ from "lodash";
+import {numbers} from './1000000.json' assert {type: 'json'}
+
+
+
+
+
 
 let items1 = [
   {
@@ -135,6 +141,7 @@ let items1 = [
   },
 ];
 
+
 //building a Sort Algorithm
 let array = [7, 5, 8, 0, 6];
 
@@ -153,9 +160,11 @@ function sum(array) {
   return total + array[0];
 }
 
+
 function mergeSort(arr) {
   if (arr.length <= 1) {
     // console.log('returned',arr)
+    //console.log(arr)
     return arr;
   }
 
@@ -189,9 +198,9 @@ function mergeSort(arr) {
     }
   }
 
-  console.log(leftIndex)
+  //console.log(leftIndex)
 
-  console.log(rightIndex)
+  //console.log(rightIndex)
 
   for(let i = leftIndex ;i < left.length ; i++){
     sortedArray.push(left[i])
@@ -202,20 +211,14 @@ function mergeSort(arr) {
   }
   
 
-  console.log(sortedArray);
+  //console.log(sortedArray);
   return sortedArray;
 }
 
 
-
-
-console.log(mergeSort([5,90,6, 6, 100,200,80,30,45,1000]));
-
-
-
-let arr = [5]
-
-//console.log(arr.slice(1)[0])
-//console.log(Math.floor(3/2))
-
-export { items1 };
+let form = document.querySelector('.test-Form')
+form.children[0].addEventListener('click', (e)=> {
+  console.log(e)
+  
+})
+//export { items1 };

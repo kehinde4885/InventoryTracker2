@@ -1,190 +1,151 @@
 {
   "items": [
     {
-      "id": 1,
-      "item": "Shirt",
-      "quantity": 20,
-      "price": 25,
-      "type": "Upper Body",
-      "isEditing" : false
-    },
-    {
-      "item": "Pants",
-      "quantity": 15,
-      "price": 35,
-      "type": "Lower Body"
-    },
-    {
-      "item": "Dress",
-      "quantity": 10,
-      "price": 50,
-      "type": "One Piece"
+      "item": "Louis Vuiton",
+      "quantity": 300,
+      "price": 500,
+      "type": "Full-Body",
+      "id": "d4a81a02-ab0b-405c-b761-69291d5e929c"
     },
     {
       "item": "Shoes",
-      "quantity": 5,
-      "price": 100,
-      "type": "Footwear"
-    },
-    {
-      "item": "Jacket",
-      "quantity": 10,
-      "price": 75,
-      "type": "Outerwear"
-    },
-    {
-      "item": "Skirt",
-      "quantity": 8,
-      "price": 30,
-      "type": "Lower Body"
-    },
-    {
-      "item": "Sunglasses",
-      "quantity": 12,
-      "price": 20,
-      "type": "Accessories"
-    },
-    {
-      "item": "Hat",
-      "quantity": 6,
-      "price": 15,
-      "type": "Accessories"
-    },
-    {
-      "item": "Belt",
-      "quantity": 9,
-      "price": 12,
-      "type": "Accessories"
-    },
-    {
-      "item": "Scarf",
-      "quantity": 7,
-      "price": 18,
-      "type": "Accessories"
-    },
-    {
-      "item": "T-Shirt",
-      "quantity": 20,
-      "price": 15,
-      "type": "Upper Body"
-    },
-    {
-      "item": "Jeans",
-      "quantity": 15,
-      "price": 40,
-      "type": "Lower Body"
-    },
-    {
-      "item": "Sweater",
-      "quantity": 10,
-      "price": 55,
-      "type": "Upper Body"
+      "quantity": 4,
+      "price": 3,
+      "type": "Footwear",
+      "id": "f8469cde-f7c2-4f20-b881-60c9b14a6689"
     },
     {
       "item": "Sneakers",
       "quantity": 5,
       "price": 90,
-      "type": "Footwear"
-    },
-    {
-      "item": "Blazer",
-      "quantity": 8,
-      "price": 80,
-      "type": "Outerwear"
-    },
-    {
-      "item": "Shorts",
-      "quantity": 12,
-      "price": 20,
-      "type": "Lower Body"
-    },
-    {
-      "item": "Watch",
-      "quantity": 10,
-      "price": 50,
-      "type": "Accessories"
-    },
-    {
-      "item": "Earrings",
-      "quantity": 8,
-      "price": 12,
-      "type": "Accessories"
+      "type": "Footwear",
+      "id": "6a0c9176-6318-4f54-a0aa-6a23f12aebad"
     },
     {
       "item": "Necklace",
       "quantity": 5,
       "price": 20,
-      "type": "Accessories"
+      "type": "Accessories",
+      "id": "ecbd84e5-563d-4311-b841-c84536138ebd"
     },
     {
       "item": "Trouser",
-      "quantity": "5",
-      "price": "200",
+      "quantity": 5,
+      "price": 200,
       "type": "Lower Body",
-      "id": 2
+      "id": "412b1290-1619-4791-a7da-3bceb787932e"
     },
     {
-      "item": "Trouser",
-      "quantity": "5",
-      "price": "200",
+      "item": "Hat",
+      "quantity": 6,
+      "price": 15,
+      "type": "Accessories",
+      "id": "2a8652ec-c6a2-4318-9bf4-81e679e6586b"
+    },
+    {
+      "item": "Skirt",
+      "quantity": 8,
+      "price": 30,
       "type": "Lower Body",
-      "id": 20
+      "id": "86680d3d-6d82-4cd2-8de6-94a01adb8848"
     },
     {
-      "item": "PlayBoy",
-      "quantity": "5",
-      "price": "10",
-      "type": "Full-Body",
-      "id": 21
+      "item": "Blazer",
+      "quantity": 8,
+      "price": 80,
+      "type": "Outerwear",
+      "id": "419ee4df-5755-460e-a075-ae165e758288"
     },
     {
-      "item": "Monica",
-      "quantity": "200",
-      "price": "200",
+      "item": "Earrings",
+      "quantity": 8,
+      "price": 30,
+      "type": "Accessories",
+      "id": "273d0321-8dc5-4cac-8924-e04c02f2e82f"
+    },
+    {
+      "item": "Belt",
+      "quantity": 9,
+      "price": 12,
+      "type": "Accessories",
+      "id": "97d04ba7-0bf0-4165-92df-3b4edb9f1e70"
+    },
+    {
+      "item": "Dress",
+      "quantity": 10,
+      "price": 50,
+      "type": "One Piece",
+      "id": "6409ca28-9836-4049-8b57-c3b27ea49c5c"
+    },
+    {
+      "item": "Jacket",
+      "quantity": 7,
+      "price": 75,
+      "type": "Outer-wear",
+      "id": "5540bb9e-5861-40d2-ae58-cfb9dabdbc04"
+    },
+    {
+      "item": "Scarf",
+      "quantity": 7,
+      "price": 18,
+      "type": "Accessories",
+      "id": "a0ea30eb-b9a9-47dc-b6ae-04f6fb659762"
+    },
+    {
+      "item": "Watch",
+      "quantity": 10,
+      "price": 50,
+      "type": "Accessories",
+      "id": "30997b00-30bd-4176-991d-c2cbdc45d29b"
+    },
+    {
+      "item": "Shorts",
+      "quantity": 12,
+      "price": 20,
       "type": "Lower Body",
-      "id": 4
+      "id": "0cab0705-e428-4a5d-afed-f2a635232fda"
     },
     {
-      "item": "hhjjkjjhbdxgvj",
-      "quantity": "700",
-      "price": "4",
-      "type": "gvhv",
-      "id": "03d459c2-dbd2-4a8c-831b-27568027552b"
+      "item": "Jeans",
+      "quantity": 15,
+      "price": 40,
+      "type": "Lower Body",
+      "id": "f2b065d0-21b8-4498-a60b-b1e0cda6c060"
     },
     {
-      "item": "hot",
-      "quantity": "200",
-      "price": "50",
-      "type": "Full-Body",
-      "id": "9affda5f-0871-4f6c-bea3-f8a8bb3ddbbd"
+      "item": "T-Shirt",
+      "quantity": 20,
+      "price": 15,
+      "type": "Upper Body",
+      "id": "c4f6d5a2-0e8d-47d7-afa3-4074132c0919"
     },
     {
-      "item": "hot",
-      "quantity": "200",
-      "price": "50",
-      "type": "Full-Body",
-      "id": "0940373f-54fb-4874-97e9-0d21ed121158"
+      "item": "Jean Jacket",
+      "quantity": 10,
+      "price": 75,
+      "type": "Outerwear",
+      "id": "63b577c7-4713-4c11-8030-0102eab22fc2"
     },
     {
-      "item": "hot",
-      "quantity": "200",
-      "price": "50",
-      "type": "Full-Body",
-      "id": "88c0c968-25c3-412b-b92e-a1ee667357f2"
+      "item": "Shirt",
+      "quantity": 100,
+      "price": 15,
+      "type": "Upper Body",
+      "id": "54151944-c32c-44dc-8f18-d71f103bcd08"
     },
     {
-      "item": "Monkey",
-      "quantity": "5000",
-      "price": "20",
-      "type": "Full-Body",
-      "id": "c10d0ff6-0f7f-4780-8c54-b65453f8072d"
+      "item": "Leather Bag",
+      "quantity": 19,
+      "price": 2000,
+      "type": "Accessories",
+      "id": "deb84804-320d-4848-9932-cc92079b6a59"
     },
     {
-      "item": "Move",
-      "quantity": "500",
-      "price": "5000",
-      "type": "Access",
-      "id": "ed037a3e-bc00-4ff6-a3da-4274f3071724"
+      "item": "Headwarmer",
+      "quantity": 20,
+      "price": 200,
+      "type": "Accessories",
+      "id": "be50ee60-068a-4ef6-8743-602770a9f32a"
     }
   ]
 }

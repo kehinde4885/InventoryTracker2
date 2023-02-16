@@ -22,7 +22,7 @@ export default function Itemslist(props) {
             {item.isEditing ? 'save' : 'edit'}
           </button>
           <button
-            onClick={()=>{handleDelete(index)}}
+            onClick={()=>{handleDelete(item.id)}}
             className="inline"
           >
             delete

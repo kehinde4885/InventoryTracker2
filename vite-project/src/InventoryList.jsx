@@ -1,15 +1,32 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import Items from "./Itemslist";
-import { items1 } from "../items";
+
+import { mergeSort } from "../functions";
+
 
 import _ from "lodash";
 import Itemslist from "./Itemslist";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
+  const [byQuantity,quantitySort] = useState([])
+  const [byPrice,priceSort] = useState([])
+  
 
-  //console.log(items)
+  console.log(items)
+  console.log(byQuantity)
+  console.log(byPrice)
+
+  useEffect( ()=> {
+    if(items.length){
+      let arr1 = mergeSort(items,'quantity')
+      let arr2 = mergeSort(items,'price')
+      quantitySort(arr1)
+      priceSort(arr2)
+    }
+  },[items])
+
 
     useEffect(() => {
       //console.log("useEffect Ran");
@@ -19,6 +36,10 @@ function InventoryList() {
         .then((data) => setItems(data));
     }, []);
 
+    //console.log(mergeSort(items,'quantity'))
+
+
+
   //console.log("Inventory Component Rerendered");
   return (
     <div>
@@ -26,7 +47,7 @@ function InventoryList() {
         <thead className="border-red-500 border">
           <tr>
             <th>Item</th>
-            <th>Price</th>
+            <th><button className="bg-blue">Price</button></th>
             <th>Quantity</th>
           </tr>
         </thead>
@@ -46,12 +67,13 @@ function InventoryList() {
     </div>
   );
 
-  function handleDelete(location) {
+  function handleDelete(id) {
     setItems((prevItem) => {
       let array = [...prevItem];
+
       //Used Lodash to delete item from array
       let deleted = _.remove(array, function (value, index, array) {
-        if (index === location) {
+        if (array[index].id === id) {
           return value;
         }
       });
