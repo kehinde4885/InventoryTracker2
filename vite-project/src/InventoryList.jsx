@@ -9,13 +9,19 @@ import Itemslist from "./Itemslist";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
+
   const [byQuantity, quantitySort] = useState([]);
   const [byPrice, priceSort] = useState([]);
+  const [sort, changeState] = useState({
+    byQuantity: false,
+    byPrice: false,
+  });
 
-  // console.log(items)
-  // console.log(byQuantity)
-  // console.log(byPrice)
+  
 
+
+  //IDEA: USE MEMOIZATION TO STORE THIS VALUES
+  //SO I CAN AVOID UNNECCESARY RERENDERS
   useEffect(() => {
     if (items.length) {
       let arr1 = mergeSort(items, "quantity");
@@ -33,7 +39,7 @@ function InventoryList() {
       .then((data) => setItems(data));
   }, []);
 
-  //console.log(mergeSort(items,'quantity'))
+
 
   //console.log("Inventory Component Rerendered");
   return (
@@ -43,17 +49,34 @@ function InventoryList() {
           <tr>
             <th>Item</th>
             <th>
-              <button className="bg-blue">Price</button>
+              <button
+                name="byPrice"
+                onClick={changeSort}
+                className="bg-blue-700 disabled:bg-blue-200"
+                disabled = {sort.byQuantity ? true : false}
+              >
+                Price
+              </button>
             </th>
-            <th>Quantity</th>
+            <th>
+              <button
+                name="byQuantity"
+                onClick={changeSort}
+                className="bg-blue-700 disabled:bg-blue-200"
+                disabled = {sort.byPrice ? true : false}
+              >
+                Quantity
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
           <Itemslist
-            items={items}
+            items={
+              sort.byPrice ? byPrice : sort.byQuantity ? byQuantity : items
+            }
             handleDelete={handleDelete}
             handleEdit={handleEdit}
-            handleChange={handleChange}
           />
         </tbody>
       </table>
@@ -77,8 +100,7 @@ function InventoryList() {
     });
   }
 
-
-  //HandleChange and HandleEdit Combined together using 
+  //HandleChange and HandleEdit Combined together using
   //a Conditional
 
   function handleEdit(e, id) {
@@ -94,13 +116,26 @@ function InventoryList() {
       array[location].isEditing = array[location].isEditing ? false : true;
 
       setItems(array);
-    } 
+    }
     //HandleChange
     else if (e.type === "change") {
       array[location] = { ...array[location], [e.target.name]: e.target.value };
 
       setItems(array);
     }
+  }
+
+  function changeSort(e) {
+    console.log(e.target.name);
+
+    // if(sort.byPrice && e.target.name === 'byQuantity' || sort.byQuantity && e.target.name === 'byPrice'){
+    //Conditional no longer neccesary, Shorter  conditional by disabling the button
+    // as neccesary
+    // }else{
+      changeState((preValue) => {
+        console.log(preValue);
+        return { ...preValue, [e.target.name]: !preValue[e.target.name] };
+      });
   }
 }
 

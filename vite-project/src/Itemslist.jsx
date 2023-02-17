@@ -3,7 +3,8 @@ import { useEffect } from "react";
 
 export default function Itemslist(props) {
 
-  const {items,handleDelete,handleEdit,handleChange} = props
+  //console.log(props)
+  const {items,handleDelete,handleEdit} = props
   
   // console.log('ItemsList Rendered')
   
