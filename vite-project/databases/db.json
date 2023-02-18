@@ -146,6 +146,20 @@
       "price": 200,
       "type": "Accessories",
       "id": "be50ee60-068a-4ef6-8743-602770a9f32a"
+    },
+    {
+      "item": "Trouser",
+      "quantity": 2,
+      "price": 200,
+      "type": "Outer Wear",
+      "id": "f4df66fc-8450-4889-a44d-9982ecb5dd68"
+    },
+    {
+      "item": "Moschino",
+      "quantity": 4,
+      "price": 500,
+      "type": "",
+      "id": "c94797bd-291b-4472-bebd-b44781c84a51"
     }
   ]
 }

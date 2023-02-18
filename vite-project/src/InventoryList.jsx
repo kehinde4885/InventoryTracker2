@@ -18,8 +18,6 @@ function InventoryList() {
   });
 
   
-
-
   //IDEA: USE MEMOIZATION TO STORE THIS VALUES
   //SO I CAN AVOID UNNECCESARY RERENDERS
   useEffect(() => {
@@ -44,6 +42,15 @@ function InventoryList() {
   //console.log("Inventory Component Rerendered");
   return (
     <div>
+      <label htmlFor="filter">Filter By</label>
+
+      <select name="type" id="filter">
+        <option value='dog'>Dog</option>
+        <option value='dog'>Dog</option>
+        <option value='dog'>Dog</option>
+        <option value='dog'>Dog</option>
+      </select>
+      
       <table className="table-auto">
         <thead className="border-red-500 border">
           <tr>

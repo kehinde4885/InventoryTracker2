@@ -5,6 +5,7 @@ import { useReducer } from "react";
 
 
 
+
 //A reducer function used to handle logic of state changes, all you 
 //need to do is pass along the case/ Context the state needs to be
 //changed in through the action parameter.
@@ -31,13 +32,17 @@ function AddInventory() {
     item: "",
     quantity: 0,
     price: 0,
-    type: "",
+    type: "Full Body",
     id: uuidv4(),
   });
 
+  let options = ['Full Body','Upper Body','Lower Body','Outer Wear','Accessories']
   //console.log("Add Inventory Component ReRendered");
 
-  //console.log(item)
+  console.log(item)
+
+  //console.log(document.getElementById('type').parentElement.childNodes)
+
 
   return (
     <form>
@@ -73,14 +78,14 @@ function AddInventory() {
         />
       </div>
       <div>
-        <label htmlFor="type">Type</label>
-        <input
-          onChange={handleChange}
-          value={item.type}
-          type="text"
-          name="type"
-          id="type"
-        />
+        <label htmlFor="type">Type of Product</label>
+        <select 
+        value={item.type}
+        onChange={handleChange} 
+        name="type" 
+        id="type">
+          {options.map((option,index)=> (<option key={index} value={option}>{option}</option>))}
+        </select>
       </div>
 
       <button onClick={handleSubmit} className="border border-blue-700">
@@ -101,13 +106,12 @@ function AddInventory() {
   function handleChange(e) {
     const { name, value } = e.target;
     //console.log(typeof value)
-    
-    //console.log(e)
 
     let form = { ...item, [name]: name === 'price' || name === 'quantity' ? parseInt(value) : value};
     //console.log(form)
     editItem({ type: "form_edited", form: form });
   }
+
 
   function submitForm() {
     fetch("http://localhost:3000/items", {
@@ -121,6 +125,7 @@ function AddInventory() {
       console.error("Error:", error);
     });
   }
+
 }
 
 export { AddInventory };
