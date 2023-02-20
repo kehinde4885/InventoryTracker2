@@ -4,7 +4,7 @@
       "item": "Louis Vuiton",
       "quantity": 300,
       "price": 500,
-      "type": "Full-Body",
+      "type": "Full Body",
       "id": "d4a81a02-ab0b-405c-b761-69291d5e929c"
     },
     {
@@ -81,7 +81,7 @@
       "item": "Jacket",
       "quantity": 7,
       "price": 75,
-      "type": "Outer-wear",
+      "type": "Outerwear",
       "id": "5540bb9e-5861-40d2-ae58-cfb9dabdbc04"
     },
     {
@@ -151,7 +151,7 @@
       "item": "Trouser",
       "quantity": 2,
       "price": 200,
-      "type": "Outer Wear",
+      "type": "Outerwear",
       "id": "f4df66fc-8450-4889-a44d-9982ecb5dd68"
     },
     {
@@ -160,6 +160,20 @@
       "price": 500,
       "type": "",
       "id": "c94797bd-291b-4472-bebd-b44781c84a51"
+    },
+    {
+      "item": "Givenchy Socks",
+      "quantity": 5,
+      "price": 540,
+      "type": "Accessories",
+      "id": "5d49ed09-4a59-4f3b-a3d0-8457173e7ae2"
+    },
+    {
+      "item": "Top Hat",
+      "quantity": 4,
+      "price": 50,
+      "type": "Accessories",
+      "id": "a2e71cf2-44fa-4671-85b5-7d578b6ecdc9"
     }
   ]
 }

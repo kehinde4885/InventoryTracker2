@@ -2,20 +2,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useReducer } from "react";
+import { useContext } from "react";
+import { optionsContext } from "./AppContext";
 
-
-
-
-//A reducer function used to handle logic of state changes, all you 
+//A reducer function used to handle logic of state changes, all you
 //need to do is pass along the case/ Context the state needs to be
 //changed in through the action parameter.
 function reducer(state, action) {
   if (action.type === "form_submitted") {
+    //New State to be Returned
     return {
       item: "",
       quantity: 0,
       price: 0,
-      type: "",
+      type: "Full Body",
       id: uuidv4(),
     };
   }
@@ -36,18 +36,20 @@ function AddInventory() {
     id: uuidv4(),
   });
 
-  let options = ['Full Body','Upper Body','Lower Body','Outer Wear','Accessories']
+  //Product Categories through Context API
+  let options = useContext(optionsContext)[0]
+  
+
   //console.log("Add Inventory Component ReRendered");
 
-  console.log(item)
+  //console.log(item)
 
   //console.log(document.getElementById('type').parentElement.childNodes)
-
 
   return (
     <form>
       <div>
-        <label htmlFor="item">Item</label>
+        <label htmlFor="item">Item Name</label>
         <input
           onChange={handleChange}
           value={item.item}
@@ -79,12 +81,13 @@ function AddInventory() {
       </div>
       <div>
         <label htmlFor="type">Type of Product</label>
-        <select 
-        value={item.type}
-        onChange={handleChange} 
-        name="type" 
-        id="type">
-          {options.map((option,index)=> (<option key={index} value={option}>{option}</option>))}
+        {/* Controlled Select Input */}
+        <select value={item.type} onChange={handleChange} name="type" id="type">
+          {options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -107,11 +110,18 @@ function AddInventory() {
     const { name, value } = e.target;
     //console.log(typeof value)
 
-    let form = { ...item, [name]: name === 'price' || name === 'quantity' ? parseInt(value) : value};
+    let form = {
+      ...item,
+      [name]:
+        name === "price"
+          ? parseInt(value)
+          : name === "quantity"
+          ? parseInt(value)
+          : value,
+    };
     //console.log(form)
     editItem({ type: "form_edited", form: form });
   }
-
 
   function submitForm() {
     fetch("http://localhost:3000/items", {
@@ -125,7 +135,6 @@ function AddInventory() {
       console.error("Error:", error);
     });
   }
-
 }
 
 export { AddInventory };

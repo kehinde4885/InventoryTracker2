@@ -3,6 +3,8 @@ function mergeSort(arr,sortby) {
 
     //Reengineered to sort an Array Of Objects
 
+    //console.log('...')
+
    if (arr.length <= 1) {
       
       return arr;

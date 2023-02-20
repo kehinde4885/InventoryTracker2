@@ -1,27 +1,70 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { optionsContext } from "./AppContext";
 import Items from "./Itemslist";
 
 import { mergeSort } from "../functions";
 
-import _ from "lodash";
+import _, { filter } from "lodash";
 import Itemslist from "./Itemslist";
 
 function InventoryList() {
   const [items, setItems] = useState([]);
 
+  const options = useContext(optionsContext)[0];
+
   const [byQuantity, quantitySort] = useState([]);
   const [byPrice, priceSort] = useState([]);
-  const [sort, changeState] = useState({
+  const [sort, changeSort] = useState({
     byQuantity: false,
     byPrice: false,
   });
 
+  const [view, changeView] = useState([]);
+  const [filtered, changeFilter] = useState({
+    bool: false,
+    by: "None",
+  });
+
+  console.log(filtered);
+
   
+
+  function handleFilter(e) {
+    //changeFilter(preValue => ({...preValue, by: e.target.value}))
+
+    if (e.target.value === "None") {
+      changeFilter((preValue) => ({ bool: false, by: e.target.value }));
+      let view = [...items];
+      changeView(view);
+
+      // change(view)
+    } else if (e.target.value) {
+      console.log(e.target.value);
+      changeFilter({ bool: true, by: e.target.value });
+      let view = items.filter((item) => item.type === e.target.value);
+      changeView(view);
+    }
+  }
+
   //IDEA: USE MEMOIZATION TO STORE THIS VALUES
   //SO I CAN AVOID UNNECCESARY RERENDERS
+
+  //Use REducer to Handle View State???
+
   useEffect(() => {
+    
+    console.log(filtered.by);
+    if (filtered.by === "None") {
+      let view = [...items];
+      changeView(view);
+    } else {
+      let view = items.filter((item) => item.type === filtered.by);
+      console.log(view);
+      changeView(view);
+    }
+
     if (items.length) {
+      console.log("Resorting Ran");
       let arr1 = mergeSort(items, "quantity");
       let arr2 = mergeSort(items, "price");
       quantitySort(arr1);
@@ -29,6 +72,7 @@ function InventoryList() {
     }
   }, [items]);
 
+  //Fetch and Set INventory
   useEffect(() => {
     //console.log("useEffect Ran");
 
@@ -44,13 +88,20 @@ function InventoryList() {
     <div>
       <label htmlFor="filter">Filter By</label>
 
-      <select name="type" id="filter">
-        <option value='dog'>Dog</option>
-        <option value='dog'>Dog</option>
-        <option value='dog'>Dog</option>
-        <option value='dog'>Dog</option>
+      <select
+        onChange={(e) => handleFilter(e)}
+        value={filtered.by}
+        name="type"
+        id="filter"
+      >
+        <option value="None">All</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
-      
+
       <table className="table-auto">
         <thead className="border-red-500 border">
           <tr>
@@ -58,9 +109,9 @@ function InventoryList() {
             <th>
               <button
                 name="byPrice"
-                onClick={changeSort}
-                className="bg-blue-700 disabled:bg-blue-200"
-                disabled = {sort.byQuantity ? true : false}
+                onClick={HandleSort}
+                className="bg-blue-700 disabled:bg-blue-200 disabled:opacity-20"
+                disabled={sort.byQuantity ? true : false || filtered.bool && true}
               >
                 Price
               </button>
@@ -68,9 +119,9 @@ function InventoryList() {
             <th>
               <button
                 name="byQuantity"
-                onClick={changeSort}
-                className="bg-blue-700 disabled:bg-blue-200"
-                disabled = {sort.byPrice ? true : false}
+                onClick={HandleSort}
+                className="bg-blue-700 disabled:bg-blue-200 disabled:opacity-20"
+                disabled={sort.byPrice ? true : false || filtered.bool && true}
               >
                 Quantity
               </button>
@@ -79,9 +130,7 @@ function InventoryList() {
         </thead>
         <tbody>
           <Itemslist
-            items={
-              sort.byPrice ? byPrice : sort.byQuantity ? byQuantity : items
-            }
+            items={sort.byPrice ? byPrice : sort.byQuantity ? byQuantity : view}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
           />
@@ -107,9 +156,6 @@ function InventoryList() {
     });
   }
 
-  //HandleChange and HandleEdit Combined together using
-  //a Conditional
-
   function handleEdit(e, id) {
     let array = [...items];
 
@@ -132,17 +178,14 @@ function InventoryList() {
     }
   }
 
-  function changeSort(e) {
-    console.log(e.target.name);
-
+  function HandleSort(e) {
     // if(sort.byPrice && e.target.name === 'byQuantity' || sort.byQuantity && e.target.name === 'byPrice'){
     //Conditional no longer neccesary, Shorter  conditional by disabling the button
     // as neccesary
     // }else{
-      changeState((preValue) => {
-        console.log(preValue);
-        return { ...preValue, [e.target.name]: !preValue[e.target.name] };
-      });
+    changeSort((preValue) => {
+      return { ...preValue, [e.target.name]: !preValue[e.target.name] };
+    });
   }
 }
 
