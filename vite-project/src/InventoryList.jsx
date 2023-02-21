@@ -1,43 +1,45 @@
 import { useState, useEffect, useContext } from "react";
+import _ from "lodash";
+
 import { optionsContext } from "./AppContext";
 import Items from "./Itemslist";
-
 import { mergeSort } from "../functions";
 
-import _, { filter } from "lodash";
+//Components
 import Itemslist from "./Itemslist";
+import ItemsHeader from "./ItemsHeader";
 
 function InventoryList() {
+  //Default State
   const [items, setItems] = useState([]);
+
+  
 
   const options = useContext(optionsContext)[0];
 
+  //Sorting State
   const [byQuantity, quantitySort] = useState([]);
   const [byPrice, priceSort] = useState([]);
+  const [byAlphabet, AlphabetSort] = useState([]);
   const [sort, changeSort] = useState({
     byQuantity: false,
     byPrice: false,
+    byAlphabet: false,
   });
 
+  //Filter & Sort are Mutually Exclusive
+  //Filter States
   const [view, changeView] = useState([]);
   const [filtered, changeFilter] = useState({
     bool: false,
     by: "None",
   });
 
-  console.log(filtered);
-
-  
-
   function handleFilter(e) {
-    //changeFilter(preValue => ({...preValue, by: e.target.value}))
-
     if (e.target.value === "None") {
       changeFilter((preValue) => ({ bool: false, by: e.target.value }));
       let view = [...items];
       changeView(view);
-
-      // change(view)
     } else if (e.target.value) {
       console.log(e.target.value);
       changeFilter({ bool: true, by: e.target.value });
@@ -52,23 +54,24 @@ function InventoryList() {
   //Use REducer to Handle View State???
 
   useEffect(() => {
-    
-    console.log(filtered.by);
+    //console.log(filtered.by);
     if (filtered.by === "None") {
       let view = [...items];
       changeView(view);
     } else {
       let view = items.filter((item) => item.type === filtered.by);
-      console.log(view);
+      //console.log(view);
       changeView(view);
     }
 
     if (items.length) {
-      console.log("Resorting Ran");
+      //console.log("Resorting Ran");
       let arr1 = mergeSort(items, "quantity");
       let arr2 = mergeSort(items, "price");
+      let arr3 = mergeSort(items,'item')
       quantitySort(arr1);
       priceSort(arr2);
+      AlphabetSort(arr3)
     }
   }, [items]);
 
@@ -80,8 +83,6 @@ function InventoryList() {
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);
-
-
 
   //console.log("Inventory Component Rerendered");
   return (
@@ -104,33 +105,18 @@ function InventoryList() {
 
       <table className="table-auto">
         <thead className="border-red-500 border">
-          <tr>
-            <th>Item</th>
-            <th>
-              <button
-                name="byPrice"
-                onClick={HandleSort}
-                className="bg-blue-700 disabled:bg-blue-200 disabled:opacity-20"
-                disabled={sort.byQuantity ? true : false || filtered.bool && true}
-              >
-                Price
-              </button>
-            </th>
-            <th>
-              <button
-                name="byQuantity"
-                onClick={HandleSort}
-                className="bg-blue-700 disabled:bg-blue-200 disabled:opacity-20"
-                disabled={sort.byPrice ? true : false || filtered.bool && true}
-              >
-                Quantity
-              </button>
-            </th>
-          </tr>
+          <ItemsHeader 
+          HandleSort={HandleSort}
+          sort={sort}
+          filtered={filtered}/>
         </thead>
         <tbody>
           <Itemslist
-            items={sort.byPrice ? byPrice : sort.byQuantity ? byQuantity : view}
+          // Renders Either the Sorted Views or Filtered View
+            items={sort.byPrice ? byPrice : 
+              sort.byQuantity ? byQuantity : 
+              sort.byAlphabet ? byAlphabet : 
+              view}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
           />
@@ -179,10 +165,8 @@ function InventoryList() {
   }
 
   function HandleSort(e) {
-    // if(sort.byPrice && e.target.name === 'byQuantity' || sort.byQuantity && e.target.name === 'byPrice'){
-    //Conditional no longer neccesary, Shorter  conditional by disabling the button
-    // as neccesary
-    // }else{
+    
+    //Signifies value the Items is being sorted By
     changeSort((preValue) => {
       return { ...preValue, [e.target.name]: !preValue[e.target.name] };
     });
