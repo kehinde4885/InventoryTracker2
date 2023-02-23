@@ -87,7 +87,7 @@ function InventoryList() {
   function handleFilter(e) {
     //Filter logic when user interaction happens
     if (e.target.value && searching.bool) {
-      console.log(e.target.value)
+      
       console.log('FS')
       changeFilter((preValue) => ({
         ...preValue,
@@ -100,18 +100,17 @@ function InventoryList() {
         filter: e.target.value,
         searching: searching.by,
       });
-    } else if (!e.target.value) {
-      console.log(e.target.value)
-      console.log('No F')
+    } else if (!e.target.value || searching.bool) {
       //No Filtering
       changeFilter((preValue) => ({
         ...preValue,
         bool: false,
         by: e.target.value,
       }));
-      changeView({ type: "Filtering", default: items, filter: e.target.value });
+
+      changeView({ type: "Searching", view: items, searching: searching.by });
     } else if (e.target.value) {
-      console.log(e.target.value)
+      
       //Filtering
       changeFilter((preValue) => ({
         ...preValue,
@@ -126,9 +125,9 @@ function InventoryList() {
   //Search only searches the current View
   function handleSearch(e) {
     const { value } = e.target;
-    let arr = view;
+    
     if (value && filtered.bool) {
-      console.log("FS");
+      
       changeSearch((preValue) => ({ ...preValue, by: value, bool: true }));
       changeView({
         type: "Filtering & Searching",
@@ -136,14 +135,15 @@ function InventoryList() {
         filter: filtered.by,
         searching: value,
       });
-    } else if (value === "") {
-      //Not Searching
-      console.log("F");
+    } else if (!value || filtered.bool) {
+      //Not Searching but filtering
       changeSearch((preValue) => ({ ...preValue, by: value, bool: false }));
       changeView({ type: "Filtering", default: items, filter: filtered.by });
-    } else {
+    } else if(value) {
       //Searching
-      console.log("S");
+     
+      let arr = view;
+      
       changeSearch((preValue) => ({ ...preValue, by: value, bool: true }));
 
       changeView({ type: "Searching", view: arr, searching: value });
