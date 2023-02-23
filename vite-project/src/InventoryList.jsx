@@ -15,7 +15,7 @@ function reducer(state, action) {
     //console.log(action);
     let arr = action.default;
     let filter = action.filter;
-    
+
     if (!filter) {
       let arr1 = arr.filter((item) => item.type);
       return arr1;
@@ -47,6 +47,8 @@ function reducer(state, action) {
     );
     //console.log(searchResults);
     return searchResults;
+  }else if(action.type === 'No Operation'){
+    return action.default
   }
 }
 
@@ -81,14 +83,13 @@ function InventoryList() {
     by: "",
   });
 
-  console.log('filter',filtered)
-   console.log('search',searching)
+  // console.log('filter',filtered)
+  //  console.log('search',searching)
 
   function handleFilter(e) {
     //Filter logic when user interaction happens
     if (e.target.value && searching.bool) {
-      
-      console.log('FS')
+      console.log("FS");
       changeFilter((preValue) => ({
         ...preValue,
         bool: true,
@@ -110,7 +111,6 @@ function InventoryList() {
 
       changeView({ type: "Searching", view: items, searching: searching.by });
     } else if (e.target.value) {
-      
       //Filtering
       changeFilter((preValue) => ({
         ...preValue,
@@ -125,9 +125,8 @@ function InventoryList() {
   //Search only searches the current View
   function handleSearch(e) {
     const { value } = e.target;
-    
+
     if (value && filtered.bool) {
-      
       changeSearch((preValue) => ({ ...preValue, by: value, bool: true }));
       changeView({
         type: "Filtering & Searching",
@@ -139,11 +138,11 @@ function InventoryList() {
       //Not Searching but filtering
       changeSearch((preValue) => ({ ...preValue, by: value, bool: false }));
       changeView({ type: "Filtering", default: items, filter: filtered.by });
-    } else if(value) {
+    } else if (value) {
       //Searching
-     
+
       let arr = view;
-      
+
       changeSearch((preValue) => ({ ...preValue, by: value, bool: true }));
 
       changeView({ type: "Searching", view: arr, searching: value });
@@ -164,9 +163,7 @@ function InventoryList() {
     //Filter Logic when App first loads or Default array Changes
     // if(items.length){
 
-    if (filtered.bool) {
-      changeView({ type: "Filtering", default: items, filter: filtered.by });
-    } else if (searching.bool && filtered.bool) {
+    if (searching.bool && filtered.bool) {
       console.log("FS");
       changeView({
         type: "Searching & Filtering",
@@ -174,10 +171,17 @@ function InventoryList() {
         filter: filtered.by,
         searching: searching.by,
       });
-    } else {
+    } else if (filtered.bool) {
+      changeView({ type: "Filtering", default: items, filter: filtered.by });
+    } else if (searching.bool) {
+      let arr = view;
       //console.log("f");
 
-      changeView({ type: "Filtering", default: items, filter: filtered.by });
+      changeView({ type: "Searching", view: arr, searching: searching.by });
+      //changeView({ type: "Filtering", default: items, filter: filtered.by });
+    }else {
+      console.log('Here')
+      changeView({type: 'No Operation' , default: items})
     }
   }, [items]);
 
