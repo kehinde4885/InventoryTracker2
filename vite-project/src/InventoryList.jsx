@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext, useReducer } from "react";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 
 import { optionsContext } from "./AppContext";
 import Items from "./Itemslist";
-import { mergeSort } from "../functions";
+import { mergeSort , letterSort } from "../functions";
 
 //Components
 import Itemslist from "./Itemslist";
@@ -47,14 +48,18 @@ function reducer(state, action) {
     );
     //console.log(searchResults);
     return searchResults;
-  }else if(action.type === 'No Operation'){
-    return action.default
+  } else if (action.type === "No Operation") {
+    return action.default;
   }
 }
 
 function InventoryList() {
   //Default State
-  const [items, setItems] = useState([]);
+  //const [items, setItems] = useState([]);
+  //Using Local Storage
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem("Items")));
+
+  const [beenEdited, changeBeenEdited] = useState(false);
 
   const options = useContext(optionsContext)[0];
 
@@ -179,9 +184,8 @@ function InventoryList() {
 
       changeView({ type: "Searching", view: arr, searching: searching.by });
       //changeView({ type: "Filtering", default: items, filter: filtered.by });
-    }else {
-      console.log('Here')
-      changeView({type: 'No Operation' , default: items})
+    } else {
+      changeView({ type: "No Operation", default: items });
     }
   }, [items]);
 
@@ -191,7 +195,7 @@ function InventoryList() {
       // console.log("Resorting Ran");
       let arr1 = mergeSort(view, "quantity");
       let arr2 = mergeSort(view, "price");
-      let arr3 = mergeSort(view, "item");
+      let arr3 = letterSort(view, "item");
       quantitySort(arr1);
       priceSort(arr2);
       AlphabetSort(arr3);
@@ -201,10 +205,9 @@ function InventoryList() {
   //Fetch and Set INventory
   useEffect(() => {
     //console.log("useEffect Ran");
-
-    fetch("http://localhost:3000/items")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
+    // fetch("http://localhost:3000/items")
+    //   .then((res) => res.json())
+    //   .then((data) => setItems(data));
   }, []);
 
   //console.log("Inventory Component Rerendered");
@@ -261,7 +264,14 @@ function InventoryList() {
         </tbody>
       </table>
 
-      <button className="border border-blue-700">New Item</button>
+      <div className="space-x-8">
+      <button className="border border-blue-700"><Link to='/new'>New Item</Link></button>
+        {beenEdited && (
+          <button onClick={HandleSave} className="border border-green-700">
+            Save Changes
+          </button>
+        )}
+      </div>
     </div>
   );
 
@@ -275,7 +285,7 @@ function InventoryList() {
           return value;
         }
       });
-
+      changeBeenEdited(true);
       return array;
     });
   }
@@ -299,7 +309,29 @@ function InventoryList() {
       array[location] = { ...array[location], [e.target.name]: e.target.value };
 
       setItems(array);
+      changeBeenEdited(true);
     }
+  }
+
+  function HandleSave() {
+    let arr = [...items]
+    localStorage.setItem('Items',JSON.stringify(arr))
+    console.log(JSON.stringify(arr))
+
+    changeBeenEdited(false)
+
+    //Be like put request for whole collection doesnt work on this API
+    // fetch("http://localhost:3000/items", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({ ...items }),
+    // }).then(res=> console.log(res))
+    // .catch((error) => {
+    //   console.log(error);
+    //   //console.error("Error:", error);
+    // });
   }
 }
 

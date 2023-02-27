@@ -13,8 +13,8 @@ function reducer(state, action) {
     //New State to be Returned
     return {
       item: "",
-      quantity: 0,
-      price: 0,
+      quantity: 1,
+      price: 1,
       type: "Full Body",
       id: uuidv4(),
     };
@@ -30,8 +30,8 @@ function AddInventory() {
   //will call the reducer function above.
   const [item, editItem] = useReducer(reducer, {
     item: "",
-    quantity: 0,
-    price: 0,
+    quantity: 1,
+    price: 1,
     type: "Full Body",
     id: uuidv4(),
   });
@@ -65,6 +65,7 @@ function AddInventory() {
           onChange={handleChange}
           value={item.quantity}
           type="number"
+          min={1}
           name="quantity"
           id="quantity"
         />
@@ -75,6 +76,7 @@ function AddInventory() {
           onChange={handleChange}
           value={item.price}
           type="number"
+          min={1}
           name="price"
           id="price"
         />
@@ -124,16 +126,23 @@ function AddInventory() {
   }
 
   function submitForm() {
-    fetch("http://localhost:3000/items", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ ...item }),
-    }).catch((error) => {
-      console.log(error);
-      console.error("Error:", error);
-    });
+    // fetch("http://localhost:3000/items", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({ ...item }),
+    // })
+    // .then(res => res.json())
+    // .then(data => console.log(data))
+    // .catch((error) => {
+    //   console.log(error);
+    //   console.error("Error:", error);
+    // })
+
+    let prev = JSON.parse(localStorage.getItem('Items'))
+    let newValue = [...prev,item]
+    localStorage.setItem('Items', JSON.stringify(newValue))
   }
 }
 
